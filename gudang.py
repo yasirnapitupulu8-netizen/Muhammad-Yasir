@@ -1,30 +1,29 @@
-def CekGudang(stok_skrg, item_masuk, jenis):
-    tot = stok_skrg + item_masuk
+def cek_inventaris_gudang(stok_saat_ini, jumlah_masuk, jenis_barang):
+    total_stok = stok_saat_ini + jumlah_masuk
     
-
-    st = ""
-    if tot > 500:
-        st = "OVERFLOW"
-    elif tot >= 400:
-        st = "PENUH"
-    elif tot >= 100:
-        st = "AMAN"
+    status_kapasitas = ""
+    if total_stok > 500:
+        status_kapasitas = "OVERFLOW"
+    elif total_stok >= 400:
+        status_kapasitas = "PENUH"
+    elif total_stok >= 100:
+        status_kapasitas = "AMAN"
     else:
-        st = "KRITIS"
+        status_kapasitas = "KRITIS"
         
-    butuh_beli = False
-    if jenis == "PERISHABLE":
-        if tot < 150:
-            butuh_beli = True
+    perlu_restock = False
+    if jenis_barang == "PERISHABLE":
+        if total_stok < 150:
+            perlu_restock = True
     else:
-        if tot < 50:
-            butuh_beli = True
+        if total_stok < 50:
+            perlu_restock = True
             
     print("=== STATUS MANAJEMEN GUDANG ===")
-    print(f"Total Stok Akhir: {tot}")
-    print(f"Status Kapasitas: {st}")
-    print(f"Rekomendasi Restock: {'YA' if butuh_beli else 'TIDAK'}")
+    print(f"Total Stok Akhir: {total_stok}")
+    print(f"Status Kapasitas: {status_kapasitas}")
+    print(f"Rekomendasi Restock: {'YA' if perlu_restock else 'TIDAK'}")
     print("===============================")
-    return tot
+    return total_stok
 
-CekGudang(350, 80, "PERISHABLE")
+cek_inventaris_gudang(350, 80, "PERISHABLE")
